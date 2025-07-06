@@ -47,6 +47,7 @@ To Manage Test Data -> manually triggered
 ```
 
 ## xpath formula:
+```xpath
 //tagName[@attribute='value']
 
 //tagName
@@ -63,8 +64,7 @@ To Manage Test Data -> manually triggered
 
 //tagName[not(@attribute='value')]
 //tagName[not(contains(@attribute,'partialValue'))]
-
-
+```
 //TODO: xpath axis
 
 ## Golden rules:
