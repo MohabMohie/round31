@@ -19,7 +19,6 @@ public class AssignmentsFlatTests {
 //        Assert.assertEquals(pageTitle, expectedTitle);
         Assert.assertEquals(driver.getTitle(), "Google");
         //TODO: investigate exception handling
-        //TODO: dynamic/active debugging
     }
 
     @BeforeMethod

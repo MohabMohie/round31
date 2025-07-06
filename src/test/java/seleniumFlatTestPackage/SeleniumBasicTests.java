@@ -1,14 +1,17 @@
 package seleniumFlatTestPackage;
 
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WindowType;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.AbstractDriverOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Test public class SeleniumBasicTests {
 
@@ -85,5 +88,50 @@ import java.time.Duration;
         // navigating to a URL
         driver.get("https://www.example.com");
         driver.navigate().to("https://www.example.com/");
+    }
+
+    @Test
+    public void chromeOptionsTest() {
+        WebDriver driver;
+        ChromeOptions options = new ChromeOptions();
+        // https://developer.chrome.com/docs/chromedriver/capabilities
+        // https://peter.sh/experiments/chromium-command-line-switches/
+        // capabilities, arguments, and experimental options
+
+        // Set mobile emulation for Pixel 7
+        Map<String, String> mobileEmulation = new HashMap<>();
+        mobileEmulation.put("deviceName", "Pixel 7");
+
+        // Set Chrome options
+        options.setAcceptInsecureCerts(true)
+                .enableBiDi()
+                .setImplicitWaitTimeout(Duration.ofSeconds(30))
+                .setEnableDownloads(true)
+//                .addArguments("start-maximized")
+                .addArguments("window-name=\"My custom title\"")
+                .addArguments("window-size=500,1000")
+                .addArguments("window-position=0,0")
+//                .addArguments("headless")
+                .setExperimentalOption("mobileEmulation", mobileEmulation)
+        // Optional: Add other useful options
+                .addArguments("--disable-blink-features=AutomationControlled")
+                .setExperimentalOption("excludeSwitches", new String[]{"enable-automation"})
+        ;
+
+        // iPhone 16 specifications (custom device metrics)
+//        Map<String, Object> deviceMetrics = new HashMap<>();
+//        deviceMetrics.put("width", 393);
+//        deviceMetrics.put("height", 852);
+//        deviceMetrics.put("pixelRatio", 3.0);
+//
+//        Map<String, Object> mobileEmulation = new HashMap<>();
+//        mobileEmulation.put("deviceMetrics", deviceMetrics);
+//        mobileEmulation.put("userAgent", "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1");
+//
+
+
+        driver = new ChromeDriver(options);
+        driver.navigate().to("https://www.google.com");
+        driver.quit();
     }
 }
