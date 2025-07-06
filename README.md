@@ -39,3 +39,37 @@ To Manage Test Data -> manually triggered
 1- datasource snapshot/backup
 2- upload backup to artifactory
 
+# Element Identification:
+
+## WebElement
+<tagName attribute="value">TEXT</tagName>
+
+## xpath formula:
+//tagName[@attribute='value']
+
+//tagName
+//tagName[@attribute]
+//tagName[@attribute1][@attribute2]
+//tagName[@attribute1='value1'][@attribute2='value2']
+
+(//tagName[@attribute='value'])[index]
+
+//tagName/childTagName
+//tagName//grandChildTagName
+
+//tagName[contains(@attribute,'partialValue')]
+
+//tagName[not(@attribute='value')]
+//tagName[not(contains(@attribute,'partialValue'))]
+
+
+//TODO: xpath axis
+
+## Golden rules:
+- use as few nodes as possible
+- use as few attributes as possible
+- use only reliable values for your attributes
+- a locator must have only one match
+- never use an index UNLESS explicitly stated in the requirements of your test
+- always try to optimize (reduce the number of nodes, reduce the number of attributes, increase the quality of values)
+

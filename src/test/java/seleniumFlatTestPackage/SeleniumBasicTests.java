@@ -57,7 +57,6 @@ import java.util.Map;
         driver.manage().window().setSize(windowDimensions);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
-        // TODO: ChromeOptions()
         // TODO: findelements vs findelement
 //        driver.findElement()
 //        driver.findElements()

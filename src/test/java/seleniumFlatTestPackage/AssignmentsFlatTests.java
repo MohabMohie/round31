@@ -1,5 +1,6 @@
 package seleniumFlatTestPackage;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -18,8 +19,14 @@ public class AssignmentsFlatTests {
 //        // Assertion to check if the page title is as expected
 //        Assert.assertEquals(pageTitle, expectedTitle);
         Assert.assertEquals(driver.getTitle(), "Google");
-        //TODO: investigate exception handling
     }
+
+    public void navigateToDuckDuckGoAndCheckLogoIsDisplayed(){
+        driver.navigate().to("https://duckduckgo.com");
+        driver.findElement(By.xpath("//div[contains(@class,'Desktop')]//img")).isDisplayed();
+    }
+
+    //TODO: cover explicit wait.
 
     @BeforeMethod
     public void beforeMethod() {
