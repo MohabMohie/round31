@@ -1,17 +1,21 @@
 package seleniumFlatTestPackage;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 @Test
 public class AssignmentsFlatTests {
     WebDriver driver;
+    Wait<WebDriver> wait;
 
     public void navigateToDuckDuckGoAndCheckPageTitle(){
         driver.navigate().to("https://duckduckgo.com");
@@ -45,11 +49,63 @@ public class AssignmentsFlatTests {
         Assert.assertTrue(driver.findElement(duckDuckGoLogoLocator).isDisplayed(), "DuckDuckGo logo is not displayed on the page.");
     }
 
-    //TODO: cover explicit wait.
+//    #7
+//    ________________ Moderate ________________
+//    Open Google Chrome
+//    Navigate to [https://www.w3schools.com/html/html_tables.asp]
+//    Assert that the Country for the Company [Ernst Handel] is [Austria]
+//    Close Google Chrome
+    public void navigateToW3SchoolsAndCheckCountryForErnstHandel() {
+       driver.navigate().to("https://www.w3schools.com/html/html_tables.asp");
+       // find the cell which has the text Austria.
+        By countryNameLabel = By.xpath("(//td[text()='Ernst Handel']/parent::tr/td)[3]");
+//        String actualCountryName = driver.findElement(countryNameLabel).getText();
+//        String expectedCountryName = "Austria";
+//        Assert.assertEquals(actualCountryName, expectedCountryName, "The country for Ernst Handel is not Austria.");
+
+        Assert.assertEquals(driver.findElement(countryNameLabel).getText(), "Austria", "The country for Ernst Handel is not Austria.");
+
+        // don't use the country text to find this cell.
+        // you can use the company name Ernst Handel.
+        // get the text from the cell.
+        // assert that the text is Austria.
+
+//        (//td[text()='Ernst Handel']/parent::tr/td)[3]
+//        (//td[text()='Ernst Handel']/following-sibling::td)[2]
+
+        waitUntilTyping(By.xpath(""), "");
+        waitUntilClicking(By.xpath(""));
+    }
+
+    private void waitUntilTyping(By locator, CharSequence... text) {
+        wait.until(d -> {
+            d.findElement(locator).sendKeys(text);
+            return true;
+        });
+    }
+
+    private void waitUntilClicking(By locator) {
+        wait.until(d -> {
+            d.findElement(locator).click();
+            return true;
+        });
+    }
+
+    //TODO: project design (POM) and architecture.
 
     @BeforeMethod
     public void beforeMethod() {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.setPageLoadStrategy(PageLoadStrategy.NONE);
+        options.setImplicitWaitTimeout(Duration.ofSeconds(5));
+        driver = new ChromeDriver(options);
+        wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(5))
+                .pollingEvery(Duration.ofMillis(300))
+                .ignoring(ElementNotInteractableException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .ignoring(NotFoundException.class)
+        ;
     }
 
     @AfterMethod

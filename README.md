@@ -50,6 +50,8 @@ To Manage Test Data -> manually triggered
 ```xpath
 //tagName[@attribute='value']
 
+//*[@attribute='value']
+
 //tagName
 //tagName[@attribute]
 //tagName[@attribute1][@attribute2]
@@ -64,8 +66,20 @@ To Manage Test Data -> manually triggered
 
 //tagName[not(@attribute='value')]
 //tagName[not(contains(@attribute,'partialValue'))]
+
+//tagName[text()='value']
+//tagName[contains(text(),'partialValue')]
+
+//tagName[@attribute='value']/axis::relatedTagName[@attribute='value']
+
 ```
-//TODO: xpath axis
+## xpath axis:
+- parent
+- following-sibling
+- preceding-sibling
+- ancestor
+- following
+- preceding
 
 ## Golden rules:
 - use as few nodes as possible
