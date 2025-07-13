@@ -3,8 +3,6 @@ package seleniumFlatTestPackage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,7 +13,7 @@ import java.time.Duration;
 @Test
 public class AssignmentsFlatTests {
     WebDriver driver;
-    Wait<WebDriver> wait;
+//    Wait<WebDriver> wait;
 
     public void navigateToDuckDuckGoAndCheckPageTitle(){
         driver.navigate().to("https://duckduckgo.com");
@@ -72,24 +70,37 @@ public class AssignmentsFlatTests {
 
 //        (//td[text()='Ernst Handel']/parent::tr/td)[3]
 //        (//td[text()='Ernst Handel']/following-sibling::td)[2]
+//
+//        // safe type casting
+//        if (driver instanceof JavascriptExecutor javascriptExecutorDriver){
+//            javascriptExecutorDriver.executeScript("arguments[0].scrollIntoView();", driver.findElement(countryNameLabel));
+//            javascriptExecutorDriver.executeScript("arguments[0].click();", driver.findElement(countryNameLabel));
+//        } else {
+//            System.out.println("Cannot cast driver to JavascriptExecutor.");
+//        }
 
-        waitUntilTyping(By.xpath(""), "");
-        waitUntilClicking(By.xpath(""));
+//        // unsafe type casting
+//         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)");
+
+//        waitUntilTyping(By.xpath(""), "");
+//        waitUntilClicking(By.xpath(""));
+
+
     }
 
-    private void waitUntilTyping(By locator, CharSequence... text) {
-        wait.until(d -> {
-            d.findElement(locator).sendKeys(text);
-            return true;
-        });
-    }
-
-    private void waitUntilClicking(By locator) {
-        wait.until(d -> {
-            d.findElement(locator).click();
-            return true;
-        });
-    }
+//    private void waitUntilTyping(By locator, CharSequence... text) {
+//        wait.until(d -> {
+//            d.findElement(locator).sendKeys(text);
+//            return true;
+//        });
+//    }
+//
+//    private void waitUntilClicking(By locator) {
+//        wait.until(d -> {
+//            d.findElement(locator).click();
+//            return true;
+//        });
+//    }
 
     //TODO: project design (POM) and architecture.
 
@@ -99,13 +110,13 @@ public class AssignmentsFlatTests {
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
         options.setImplicitWaitTimeout(Duration.ofSeconds(5));
         driver = new ChromeDriver(options);
-        wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(5))
-                .pollingEvery(Duration.ofMillis(300))
-                .ignoring(ElementNotInteractableException.class)
-                .ignoring(StaleElementReferenceException.class)
-                .ignoring(NotFoundException.class)
-        ;
+//        wait = new FluentWait<>(driver)
+//                .withTimeout(Duration.ofSeconds(5))
+//                .pollingEvery(Duration.ofMillis(300))
+//                .ignoring(ElementNotInteractableException.class)
+//                .ignoring(StaleElementReferenceException.class)
+//                .ignoring(NotFoundException.class)
+//        ;
     }
 
     @AfterMethod

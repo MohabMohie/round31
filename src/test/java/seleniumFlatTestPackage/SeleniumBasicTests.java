@@ -206,9 +206,9 @@ import java.util.Map;
             return isDisplayed && isEnabled;
         });
 
-        wait.until(ExpectedConditions.and(
-                ExpectedConditions.visibilityOfElementLocated(revealedInput),
-                ExpectedConditions.domPropertyToBe(driver.findElement(revealedInput),"disabled", null)));
+//        wait.until(ExpectedConditions.and(
+//                ExpectedConditions.visibilityOfElementLocated(revealedInput),
+//                ExpectedConditions.domPropertyToBe(driver.findElement(revealedInput),"disabled", null)));
 
         // typing after revealing
 //        driver.findElement(revealedInput).sendKeys("World!");

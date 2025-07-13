@@ -89,3 +89,11 @@ To Manage Test Data -> manually triggered
 - never use an index UNLESS explicitly stated in the requirements of your test
 - always try to optimize (reduce the number of nodes, reduce the number of attributes, increase the quality of values)
 
+## Design Patterns:
+- Bot pattern `src/main/java/engine/Bot.java` -> Moves all selenium-actions to a single class, allowing for easy reuse and maintenance of common actions.
+- Test Abstraction `src/test/java/modularTests/TestCase.java` -> Provides a base class for all test cases, allowing for shared setup and teardown logic.
+- Fluent design - action chaining `src/main/java/engine/FluentBot.java` -> Makes writing tests more readable and maintainable, lower learning curve.
+- Page Object Model `src/main/java/pages/` -> Need to contain all locators and business-level actions for the page.
+
+## Mixed design strategies:
+- Bot + Abstract Test Case + Fluent Bot + Fluent Page Object Model
