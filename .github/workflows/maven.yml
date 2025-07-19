@@ -32,7 +32,8 @@ jobs:
       with:
         install-dependencies: true
     
-    - name: Check chrome version
+    - if: ${{ ! matrix.os == 'macos-latest' }}
+      name: Check chrome version
       run: chrome --version
     
     - name: Set up JDK 21
@@ -41,6 +42,10 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+
+    - if: ${{ matrix.os == 'ubuntu-latest' }}
+      name: Set up Native Selenium Grid
+      run: docker compose -f src/main/resources/docker-compose/selenium4.yml up --scale chrome=10 --scale edge=0 --scale firefox=0 -d
         
     - name: Test with Maven
       run: mvn test
