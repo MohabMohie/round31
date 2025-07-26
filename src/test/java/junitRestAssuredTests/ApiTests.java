@@ -11,6 +11,9 @@ import io.restassured.RestAssured.*;
 import io.restassured.matcher.RestAssuredMatchers.*;
 import org.hamcrest.Matchers.*;
 import  io.restassured.module.jsv.JsonSchemaValidator.*;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class ApiTests {
@@ -33,6 +36,10 @@ public class ApiTests {
     public void checkBreeds() {
         System.out.println("Checking breeds... - " + Thread.currentThread().getName());
         response.then().body("data.breed", Matchers.hasItems("Abyssinian", "Chausie", "Brazilian Shorthair"));
+//        var sessionID = response.then().extract().cookie("JSESSIONID");
+//        WebDriver driver = new ChromeDriver();
+//        driver.manage().addCookie(new Cookie("JSESSIONID", sessionID));
+//        driver.navigate().to("");
     }
 
     @BeforeAll
