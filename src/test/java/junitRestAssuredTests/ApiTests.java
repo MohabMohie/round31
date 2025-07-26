@@ -1,6 +1,7 @@
 package junitRestAssuredTests;
 
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
@@ -15,6 +16,8 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.net.URI;
+
 
 public class ApiTests {
     static Response response;
@@ -24,6 +27,12 @@ public class ApiTests {
         System.out.println("Checking status code... - " + Thread.currentThread().getName());
         response.then()
                 .statusCode(200);
+    }
+
+    @Test
+    public void checkSchema() {
+        System.out.println("Checking total... - " + Thread.currentThread().getName());
+        response.then().body(JsonSchemaValidator.matchesJsonSchema(URI.create("https://catfact.ninja/docs?api-docs.json#/components/schemas/Breed")));
     }
 
     @Test
